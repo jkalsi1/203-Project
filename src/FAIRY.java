@@ -38,7 +38,7 @@ public class FAIRY extends ActionEntities
             return true;
         }
         else {
-            int count = 0;
+
             Point nextPos = fairy.nextPositionFairy(world, target.getPosition());
 
             if (!fairy.getPosition().equals(nextPos)) {
@@ -49,22 +49,22 @@ public class FAIRY extends ActionEntities
 
                 world.moveEntity(fairy, nextPos);
             }
-            count++;
+
             return false;
         }
     }
 
     private Point nextPositionFairy(WorldModel world, Point destPos)
     {
-        AStarPathingStrategy thisstep = new AStarPathingStrategy();
+        AStarPathingStrategy fairyStep = new AStarPathingStrategy();
 
         Predicate<Point> pred = s -> !world.isOccupied(s) && world.withinBounds(s);
 
         // ignore for now, single step doesn't check this
         BiPredicate<Point, Point> bipred = (p1, p2) -> Point.adjacent(p1, p2);
 
-        List<Point> FairyPath = thisstep.computePath(this.getPosition(), destPos,
-                pred, bipred, thisstep.CARDINAL_NEIGHBORS);
+        List<Point> FairyPath = fairyStep.computePath(this.getPosition(), destPos,
+                pred, bipred, fairyStep.CARDINAL_NEIGHBORS);
 
         if (!FairyPath.isEmpty()) {
             Point newPos = new Point(FairyPath.get(0).x, FairyPath.get(0).y);
