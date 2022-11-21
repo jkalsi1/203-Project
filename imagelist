@@ -1,4 +1,12 @@
 house images/house.bmp 255 255 255 0
+wyvern images/wyvern1.bmp
+wyvern images/wyvern2.bmp
+wyvern images/wyvern3.bmp
+wyvern images/wyvern4.bmp
+wyvern images/wyvern5.bmp
+wyvern images/wyvern6.bmp
+wyvern images/wyvern7.bmp
+wyvern images/wyvern8.bmp
 obstacle images/water0.png
 obstacle images/water1.png
 obstacle images/water2.png
