@@ -53,7 +53,7 @@ class AStarPathingStrategy implements PathingStrategy
         List<Point> neighbors = potentialNeighbors.apply(curr.getP()).
                 filter(p -> !(start.equals(p) && end.equals(p))).
                 filter(canPassThrough). collect(Collectors.toList());
-             // iterate through each neighbor point to see if has been check already to add to open list
+             // iterate through each neighbor point to see if has been checked already to add to open list
             for (Point neighbor : neighbors) {
                 if (!closed.containsKey(neighbor)) {
                     // add neighbor to list if not in closed list, set parent to current node
