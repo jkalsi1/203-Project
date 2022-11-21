@@ -22,10 +22,7 @@ public abstract class AnimatedEntity extends Entity
         this.setImageIndex((this.getImageIndex() + 1) % this.getImages().size());
     }
 
-    public abstract void scheduleActions(
-            EventScheduler scheduler,
-            WorldModel world,
-            ImageStore imageStore);
+
 
 
 }

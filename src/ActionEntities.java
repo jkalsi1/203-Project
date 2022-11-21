@@ -21,4 +21,8 @@ public abstract class ActionEntities extends AnimatedEntity
     }
 
     public abstract void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler);
+    public abstract void scheduleActions(
+            EventScheduler scheduler,
+            WorldModel world,
+            ImageStore imageStore);
 }
