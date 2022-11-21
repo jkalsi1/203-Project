@@ -205,6 +205,8 @@ public final class WorldModel
                     return TREE.parseTree(properties, world, imageStore);
                 case SAPLING.SAPLING_KEY:
                     return SAPLING.parseSapling(properties, world, imageStore);
+                case Wyvern.WYVERN_KEY:
+                    return Wyvern.parseWyvern(properties, world, imageStore);
             }
         }
 
