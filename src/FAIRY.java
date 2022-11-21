@@ -64,7 +64,7 @@ public class FAIRY extends ActionEntities
         BiPredicate<Point, Point> bipred = (p1, p2) -> Point.adjacent(p1, p2);
 
         List<Point> FairyPath = thisstep.computePath(this.getPosition(), destPos,
-                pred, bipred, SingleStepPathingStrategy.CARDINAL_NEIGHBORS);
+                pred, bipred, thisstep.CARDINAL_NEIGHBORS);
 
         if (!FairyPath.isEmpty()) {
             Point newPos = new Point(FairyPath.get(0).x, FairyPath.get(0).y);
