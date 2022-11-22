@@ -98,7 +98,8 @@ public final class VirtualWorld extends PApplet
             Optional<PImage> currentImage = world.getBackgroundImage(p);
             Optional<PImage> clickedImage = world.getBackgroundImage(pressed);
 
-            if (currentImage.equals(clickedImage)) {
+            if (currentImage.equals(clickedImage))
+            {
                 world.setBackground(p, new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
             }
         }

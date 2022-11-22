@@ -63,7 +63,7 @@ public abstract class Dude extends ActionEntities
                     0,
                     Integer.parseInt(properties[DUDE_ACTION_PERIOD]),
                     Integer.parseInt(properties[DUDE_ANIMATION_PERIOD]),
-                    0 , 0);
+                    10 , 10);
             world.tryAddEntity(entity);
         }
 

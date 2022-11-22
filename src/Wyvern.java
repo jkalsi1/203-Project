@@ -17,7 +17,7 @@ public class Wyvern  extends ActionEntities{
     // I think these col rows determine size of the entity pic? on map?
     private static final int WYVERN_COL = 2;
     private static final int WYVERN_ROW = 3;
-    private static final int WYVERN_ACTION_PERIOD = 4;
+    private static final int WYVERN_ACTION_PERIOD = 1;
     // I think this determines how fast the animation is (like 5 ticks per sec in this case or sth)
     private static final int WYVERN_ANIMATION_PERIOD = 5;
     public Wyvern(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod, int health, int healthLimit) {
@@ -42,7 +42,7 @@ public class Wyvern  extends ActionEntities{
                     Integer.parseInt(properties[WYVERN_ACTION_PERIOD]),
                     // I think this determines how fast the animation goes
                     Integer.parseInt(properties[WYVERN_ANIMATION_PERIOD]),
-                    0, 0
+                    5, 5
             );
             world.tryAddEntity(entity);
         }
@@ -58,8 +58,9 @@ public class Wyvern  extends ActionEntities{
             EventScheduler scheduler)
     {
         if (Point.adjacent(wyvern.getPosition(), target.getPosition())) {
-            world.removeEntity(target);
-            scheduler.unscheduleAllEvents(target);
+            target.setHealth(target.getHealth()-1);
+//            world.removeEntity(target);
+//            scheduler.unscheduleAllEvents(target);
             return true;
         }
         else {
@@ -120,17 +121,18 @@ public class Wyvern  extends ActionEntities{
         // if we want this wyvern to chase dudes, but we want to slow down their movement speed so that they dont immediately
         // catch up to the dudes, maybe like 3 times slower, not sure, lots of issues arise here that we need to think of
         Optional<Entity> wyvernTarget =
-                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(STUMP.class)));
+                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(TREE.class)));
 
         if (wyvernTarget.isPresent()) {
             Point tgtPos = wyvernTarget.get().getPosition();
 
             if (Wyvern.moveToWyvern( this, world, wyvernTarget.get(), scheduler)) {
-                SAPLING sapling = new SAPLING("sapling_" + this.getId(), tgtPos,
-                        imageStore.getImageList(SAPLING.SAPLING_KEY), SAPLING.getSaplingActionAnimationPeriod(), SAPLING.getSaplingActionAnimationPeriod(), 0, SAPLING.getSaplingHealthLimit());
-
-                world.addEntity(sapling);
-                sapling.scheduleActions(scheduler, world, imageStore);
+//                STUMP stump = new STUMP( this.getId(),
+//                        this.getPosition(),
+//                        imageStore.getImageList(STUMP.STUMP_KEY), 0, 0);
+//
+//                world.addEntity(stump);
+                //stump.scheduleActions(scheduler, world, imageStore);
             }
         }
 
