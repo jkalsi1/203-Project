@@ -101,8 +101,9 @@ public final class VirtualWorld extends PApplet
         }
 
         world.setBackground(pressed , new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
-
-        world.addEntity(new Wyvern("wyvern_5_6", pressed, imageStore.getImageList("wyvern"), 4,5,0,0));
+        Wyvern wyvernentity = new Wyvern("wyvern_5_6", pressed, imageStore.getImageList("wyvern"), 4,5,0,0);
+        world.addEntity(wyvernentity);
+        wyvernentity.scheduleActions(scheduler, world, imageStore);
 
         Optional<Entity> entityOptional = world.getOccupant(pressed);
         if (entityOptional.isPresent())
