@@ -31,6 +31,9 @@ public class Wyvern  extends ActionEntities{
         if (properties.length == WYVERN_NUM_PROPERTIES) {
             Point pt = new Point(Integer.parseInt(properties[WYVERN_COL]),
                     Integer.parseInt(properties[WYVERN_ROW]));
+            System.out.println("wyvern id: ");
+            System.out.println(properties[WYVERN_ID]);
+
             Wyvern entity = new Wyvern(properties[WYVERN_ID],
                     pt,
                     // this line below gets the list of images corresponding to the key we have, in this case our wyvern key (check imagelist.txt)

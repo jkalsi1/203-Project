@@ -95,12 +95,14 @@ public final class VirtualWorld extends PApplet
             Optional<PImage> currentImage = world.getBackgroundImage(p);
             Optional<PImage> clickedImage = world.getBackgroundImage(pressed);
 
-            if (currentImage.hashCode() == clickedImage.hashCode()) {
+            if (currentImage.equals(clickedImage)) {
                 world.setBackground(p, new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
             }
         }
 
-        world.setBackground(pressed,new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
+        world.setBackground(pressed , new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
+
+        world.addEntity(new Wyvern("wyvern_5_6", pressed, imageStore.getImageList("wyvern"), 4,5,0,0));
 
         Optional<Entity> entityOptional = world.getOccupant(pressed);
         if (entityOptional.isPresent())
@@ -114,24 +116,18 @@ public final class VirtualWorld extends PApplet
     // returns list of points in a square radius of the pressed point
     private List<Point> pointsRadius(Point p) {
         List<Point> points = new ArrayList<>();
-        int radius = 3;
-
         points.add(new Point(p.x, p.y + 1));
         points.add(new Point(p.x,p.y-1));
         points.add(new Point(p.x - 1, p.y));
         points.add(new Point(p.x + 1, p.y));
-
         points.add(new Point(p.x, p.y + 2));
         points.add(new Point(p.x,p.y-2));
         points.add(new Point(p.x - 2, p.y));
         points.add(new Point(p.x + 2, p.y));
-
         points.add(new Point(p.x - 1, p.y + 1));
         points.add(new Point(p.x - 1, p.y -1));
-
         points.add(new Point(p.x + 1, p.y + 1));
         points.add(new Point(p.x + 1, p.y -1));
-
         return points;
     }
 
