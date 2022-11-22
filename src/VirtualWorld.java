@@ -91,6 +91,9 @@ public final class VirtualWorld extends PApplet
 
         List<Point> squareClicked = pointsRadius(pressed);
 
+        // okay so, background has multiple different tile types, this only checks if the tile is pure grass
+        // it wont spawn infected tile on a flower tile, so we need to change this to also change the flower tiles
+        // maybe we can check if the point has a background class instead of checking if they are the same same tile type? idk
         for (Point p : squareClicked) {
             Optional<PImage> currentImage = world.getBackgroundImage(p);
             Optional<PImage> clickedImage = world.getBackgroundImage(pressed);
@@ -101,9 +104,12 @@ public final class VirtualWorld extends PApplet
         }
 
         world.setBackground(pressed , new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
-        Wyvern wyvernentity = new Wyvern("wyvern_5_6", pressed, imageStore.getImageList("wyvern"), 4,5,0,0);
-        world.addEntity(wyvernentity);
-        wyvernentity.scheduleActions(scheduler, world, imageStore);
+        // only spawns wyvern if point clicked isnt occupied by entity
+        if (!world.isOccupied(pressed)) {
+            Wyvern wyvernentity = new Wyvern("wyvern_5_6", pressed, imageStore.getImageList("wyvern"), 4, 5, 0, 0);
+            world.addEntity(wyvernentity);
+            wyvernentity.scheduleActions(scheduler, world, imageStore);
+        }
 
         Optional<Entity> entityOptional = world.getOccupant(pressed);
         if (entityOptional.isPresent())
