@@ -72,15 +72,15 @@ public abstract class Dude extends ActionEntities
 
     public Point nextPositionDude(WorldModel world, Point destPos)
     {
-        SingleStepPathingStrategy thisstep = new SingleStepPathingStrategy();
+        AStarPathingStrategy dudeStep = new AStarPathingStrategy();
 
         Predicate<Point> pred = s -> !world.isOccupied(s) && world.withinBounds(s);
 
         // ignore for now, single step doesn't check this
-        BiPredicate<Point, Point> bipred = (p1, p2) -> !Point.adjacent(p1, p2);
+        BiPredicate<Point, Point> bipred = (p1, p2) -> Point.adjacent(p1, p2);
 
-        List<Point> DudePath = thisstep.computePath(this.getPosition(), destPos,
-                pred, bipred, SingleStepPathingStrategy.CARDINAL_NEIGHBORS);
+        List<Point> DudePath = dudeStep.computePath(this.getPosition(), destPos,
+                pred, bipred, dudeStep.CARDINAL_NEIGHBORS);
         //int horiz = Integer.signum(destPos.x - this.getPosition().x);
 
         if(!DudePath.isEmpty())
