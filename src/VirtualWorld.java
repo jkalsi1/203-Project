@@ -107,7 +107,7 @@ public final class VirtualWorld extends PApplet
         world.setBackground(pressed , new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
         // only spawns wyvern if point clicked isnt occupied by entity
         if (!world.isOccupied(pressed)) {
-            Wyvern wyvernentity = new Wyvern("wyvern_5_6", pressed, imageStore.getImageList("wyvern"), 4, 5, 0, 0);
+            Wyvern wyvernentity = new Wyvern("wyvern_"+pressed.x+"_"+pressed.y, pressed, imageStore.getImageList("wyvern"), 4, 5, 0, 0);
             world.addEntity(wyvernentity);
             wyvernentity.scheduleActions(scheduler, world, imageStore);
         }
