@@ -14,6 +14,7 @@ obstacle images/water1.png
 obstacle images/water0.png
 grass images/grass.png
 infectedgrass images/grass_infected.png
+infectedflowers images/flowers_infected.png
 flowers images/flowers.png
 background_default images/none.bmp
 dirt images/dirt.bmp
