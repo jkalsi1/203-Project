@@ -96,12 +96,14 @@ public final class VirtualWorld extends PApplet
         // maybe we can check if the point has a background class instead of checking if they are the same same tile type? idk
         for (Point p : squareClicked) {
             Optional<PImage> currentImage = world.getBackgroundImage(p);
-            Optional<PImage> clickedImage = world.getBackgroundImage(pressed);
 
-            if (currentImage.equals(clickedImage))
+            if (currentImage.equals(world.getBackgroundImage(new Point(0,0))))
             {
                 world.setBackground(p, new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
+            } else if (currentImage.equals(world.getBackgroundImage(new Point (1,1)))){
+                world.setBackground(p, new Background("infectedflowers", imageStore.getImageList("infectedflowers")));
             }
+
         }
 
         world.setBackground(pressed , new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
