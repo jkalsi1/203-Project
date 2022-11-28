@@ -97,13 +97,14 @@ public final class VirtualWorld extends PApplet
         for (Point p : squareClicked) {
             Optional<PImage> currentImage = world.getBackgroundImage(p);
 
-            if (currentImage.equals(world.getBackgroundImage(new Point(0,0))))
+            if ( (currentImage.equals(world.getBackgroundImage(new Point(0,0)))) ||
+                    ( (!(currentImage.equals(world.getBackgroundImage(new Point(0,8))))) &&
+                            (!(currentImage.equals(world.getBackgroundImage(new Point (1,1)))))))
             {
                 world.setBackground(p, new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
-            } else if (currentImage.equals(world.getBackgroundImage(new Point (1,1)))){
+            } else if (currentImage.equals(world.getBackgroundImage(new Point (1,1)))) {
                 world.setBackground(p, new Background("infectedflowers", imageStore.getImageList("infectedflowers")));
             }
-
         }
 
         world.setBackground(pressed , new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
