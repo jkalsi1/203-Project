@@ -30,17 +30,23 @@ public class DUDE_NOT_FULL extends Dude
             ImageStore imageStore,
             EventScheduler scheduler)
     {
-        Optional<Entity> target =
-                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(TREE.class, SAPLING.class)));
+        if(this.getHealth() > 0) {
+            Optional<Entity> target =
+                    world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(TREE.class, SAPLING.class)));
 
-        if (!target.isPresent() || !this.moveTo(world,
-                target.get(),
-                scheduler)
-                || !this.transformNotFull(world, scheduler, imageStore))
+            if (!target.isPresent() || !this.moveTo(world,
+                    target.get(),
+                    scheduler)
+                    || !this.transformNotFull(world, scheduler, imageStore)) {
+                scheduler.scheduleEvent(this,
+                        new Activity(this, world, imageStore),
+                        this.getActionPeriod());
+            }
+        }
+        else
         {
-            scheduler.scheduleEvent(this,
-                    new Activity(this, world, imageStore),
-                    this.getActionPeriod());
+            world.removeEntity(this);
+            scheduler.unscheduleAllEvents(this);
         }
     }
 
@@ -52,7 +58,7 @@ public class DUDE_NOT_FULL extends Dude
         if (this.getResourceCount() >= this.getResourceLimit()) {
             DUDE_FULL miner = new DUDE_FULL(this.getId(),
                     this.getPosition(), this.getImages(), this.getResourceLimit(), 0, this.getActionPeriod(),
-                    this.getAnimationPeriod(),0, 0);
+                    this.getAnimationPeriod(),10, 10);
 
             world.removeEntity(this);
             scheduler.unscheduleAllEvents(this);
@@ -73,6 +79,11 @@ public class DUDE_NOT_FULL extends Dude
     {
         if (Point.adjacent(this.getPosition(), target.getPosition())) {
             this.setResourceCount(this.getResourceCount()+1);
+            // only way for dude not full to regen hp (other than transforming into dude full)
+            if (this.getHealth() < this.getHealthLimit())
+            {
+                this.setHealth(this.getHealth() + 1);
+            }
             target.setHealth(target.getHealth() - 1);
             return true;
         }
@@ -84,7 +95,6 @@ public class DUDE_NOT_FULL extends Dude
                 if (occupant.isPresent()) {
                     scheduler.unscheduleAllEvents(occupant.get());
                 }
-
                 world.moveEntity(this, nextPos);
             }
             return false;

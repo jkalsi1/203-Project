@@ -121,7 +121,7 @@ public class Wyvern  extends ActionEntities{
         // if we want this wyvern to chase dudes, but we want to slow down their movement speed so that they dont immediately
         // catch up to the dudes, maybe like 3 times slower, not sure, lots of issues arise here that we need to think of
         Optional<Entity> wyvernTarget =
-                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(TREE.class)));
+                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(Dude.class)));
 
         if (wyvernTarget.isPresent()) {
             Point tgtPos = wyvernTarget.get().getPosition();

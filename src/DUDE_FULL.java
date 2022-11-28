@@ -30,18 +30,24 @@ public class DUDE_FULL extends Dude
             ImageStore imageStore,
             EventScheduler scheduler)
     {
-        Optional<Entity> fullTarget =
-                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(HOUSE.class)));
-
-        if (fullTarget.isPresent() && this.moveTo(world,
-                fullTarget.get(), scheduler))
+        if (this.getHealth() > 0)
         {
-            this.transformFull(world, scheduler, imageStore);
+            Optional<Entity> fullTarget =
+                    world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(HOUSE.class)));
+
+            if (fullTarget.isPresent() && this.moveTo(world,
+                    fullTarget.get(), scheduler)) {
+                this.transformFull(world, scheduler, imageStore);
+            } else {
+                scheduler.scheduleEvent(this,
+                        new Activity(this, world, imageStore),
+                        this.getActionPeriod());
+            }
         }
-        else {
-            scheduler.scheduleEvent(this,
-                    new Activity(this, world, imageStore),
-                    this.getActionPeriod());
+        else
+        {
+            world.removeEntity(this);
+            scheduler.unscheduleAllEvents(this);
         }
     }
 
@@ -57,7 +63,7 @@ public class DUDE_FULL extends Dude
                 0,
                 this.getActionPeriod(),
                 this.getAnimationPeriod(),
-                0, 0);
+                10, 10);
 
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);
