@@ -17,7 +17,7 @@ public class Wyvern  extends ActionEntities{
     // I think these col rows determine size of the entity pic? on map?
     private static final int WYVERN_COL = 2;
     private static final int WYVERN_ROW = 3;
-    private static final int WYVERN_ACTION_PERIOD = 1;
+    private static final int WYVERN_ACTION_PERIOD = 5;
     // I think this determines how fast the animation is (like 5 ticks per sec in this case or sth)
     private static final int WYVERN_ANIMATION_PERIOD = 5;
     public Wyvern(String id, Point position, List<PImage> images, int actionPeriod, int animationPeriod, int health, int healthLimit) {
