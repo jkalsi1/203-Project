@@ -82,19 +82,39 @@ public class Player extends ActionEntities {
     // calculates the next pos that player takes, it will copy fairy movement just to check if scheduling actions works
     public Point nextPositionPlayer(WorldModel world, int direction)
     {
-        Point newPos;
+        Point newPos = this.getPosition();
         switch (direction)
         {
             case 1:
-                return newPos = new Point(this.getPosition().x, this.getPosition().y-1);
+                Point pos = new Point(this.getPosition().x, this.getPosition().y-1);
+                if(!world.isOccupied(pos))
+                {
+                    newPos = pos;
+                }
+                return newPos;
             case 2:
-                return newPos = new Point(this.getPosition().x, this.getPosition().y+1);
+                Point pos2 = new Point(this.getPosition().x, this.getPosition().y+1);
+                if(!world.isOccupied(pos2))
+                {
+                    newPos = pos2;
+                }
+                return newPos;
             case 3:
-                return newPos = new Point(this.getPosition().x-1, this.getPosition().y);
+                Point pos3 = new Point(this.getPosition().x-1, this.getPosition().y);
+                if(!world.isOccupied(pos3))
+                {
+                    newPos = pos3;
+                }
+                return newPos;
             case 4:
-                return newPos = new Point(this.getPosition().x+1, this.getPosition().y);
+                Point pos4 = new Point(this.getPosition().x+1, this.getPosition().y);
+                if(!world.isOccupied(pos4))
+                {
+                    newPos = pos4;
+                }
+                return newPos;
         }
-        return this.getPosition();
+        return newPos;
     }
 
     // this activity mimics the fairy activity just to see if scheduling actions works, we will change this later to whatever
@@ -104,16 +124,42 @@ public class Player extends ActionEntities {
             ImageStore imageStore,
             EventScheduler scheduler)
     {
-//        Optional<Entity> playerTarget =
-//                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(Dude.class)));
-//
-//        if (playerTarget.isPresent()) {
-//            Point tgtPos = playerTarget.get().getPosition();
-//
-//            if (Player.moveToPlayer( this, world, playerTarget.get(), scheduler)) {
-//            }
-//        }
-//
+        Point north = new Point(this.getPosition().x, this.getPosition().y-1);
+        Point south = new Point(this.getPosition().x, this.getPosition().y+1);
+        Point left = new Point(this.getPosition().x-1, this.getPosition().y);
+        Point right = new Point(this.getPosition().x+1, this.getPosition().y);
+        if (!world.isOccupied(north))
+        {
+            TREE tree = new TREE("tree_" + this.getId(), north,
+                    imageStore.getImageList(TREE.TREE_KEY), TREE.getTreeActionPeriod(), TREE.getTreeAnimationPeriod(), TREE.getTreeHealth(), 0);
+
+            world.addEntity(tree);
+            tree.scheduleActions(scheduler, world, imageStore);
+        }
+        else if (!world.isOccupied(south))
+        {
+            TREE tree = new TREE("tree_" + this.getId(), south,
+                    imageStore.getImageList(TREE.TREE_KEY), TREE.getTreeActionPeriod(), TREE.getTreeAnimationPeriod(), TREE.getTreeHealth(),0);
+
+            world.addEntity(tree);
+            tree.scheduleActions(scheduler, world, imageStore);
+        }
+        else if (!world.isOccupied(left))
+        {
+            TREE tree = new TREE("tree_" + this.getId(), left,
+                    imageStore.getImageList(TREE.TREE_KEY), TREE.getTreeActionPeriod(), TREE.getTreeAnimationPeriod(), TREE.getTreeHealth(),0);
+
+            world.addEntity(tree);
+            tree.scheduleActions(scheduler, world, imageStore);
+        }
+        else if (!world.isOccupied(right))
+        {
+            TREE tree = new TREE("tree_" + this.getId(), right,
+                    imageStore.getImageList(TREE.TREE_KEY), TREE.getTreeActionPeriod(), TREE.getTreeAnimationPeriod(), TREE.getTreeHealth(),0);
+
+            world.addEntity(tree);
+            tree.scheduleActions(scheduler, world, imageStore);
+        }
 //        scheduler.scheduleEvent(this,
 //                new Activity(this, world, imageStore),
 //                this.getActionPeriod());
