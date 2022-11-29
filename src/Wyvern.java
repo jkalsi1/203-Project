@@ -84,7 +84,7 @@ public class Wyvern  extends ActionEntities{
     private Point nextPositionWyvern(WorldModel world, Point destPos)
     {
         // creating new astar class
-        AStarPathingStrategy wyvernStep = new AStarPathingStrategy();
+        SingleStepPathingStrategy wyvernStep = new SingleStepPathingStrategy();
         // predicate to check if the point can be passed through
         Predicate<Point> pred = s -> !world.isOccupied(s) && world.withinBounds(s);
 
