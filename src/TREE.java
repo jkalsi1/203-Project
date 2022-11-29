@@ -49,6 +49,18 @@ public class TREE extends Plant
         return TREE_HEALTH_MIN;
     }
 
+    public static int getTreeAnimationPeriod() {
+        return TREE_ANIMATION_PERIOD;
+    }
+
+    public static int getTreeActionPeriod() {
+        return TREE_ACTION_PERIOD;
+    }
+
+    public static int getTreeHealth() {
+        return TREE_HEALTH;
+    }
+
     public void executeActivity(
             WorldModel world,
             ImageStore imageStore,
