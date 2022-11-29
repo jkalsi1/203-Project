@@ -111,9 +111,16 @@ public final class VirtualWorld extends PApplet
         world.setBackground(pressed , new Background("infectedgrass", imageStore.getImageList("infectedgrass")));
         // only spawns wyvern if point clicked isnt occupied by entity
         if (!world.isOccupied(pressed)) {
-            Wyvern wyvernentity = new Wyvern("wyvern_"+pressed.x+"_"+pressed.y, pressed, imageStore.getImageList("wyvern"), 4, 5, 0, 0);
-            world.addEntity(wyvernentity);
-            wyvernentity.scheduleActions(scheduler, world, imageStore);
+            System.out.println(pressed);
+            if ((pressed.x + pressed.y) % 2 == 0) {
+                Wyvern wyvernentity = new Wyvern("wyvern_" + pressed.x + "_" + pressed.y, pressed, imageStore.getImageList("wyvern"), 4, 5, 0, 0);
+                world.addEntity(wyvernentity);
+                wyvernentity.scheduleActions(scheduler, world, imageStore);
+            } else {
+                DUDE_NOT_FULL dudenentity = new DUDE_NOT_FULL("DUDE_NOT_FULL_" + pressed.x + "_" + pressed.y, pressed, imageStore.getImageList("dude"), 5, 0,0,2,5,5);
+                world.addEntity(dudenentity);
+                dudenentity.scheduleActions(scheduler, world, imageStore);
+            }
         }
 
         Optional<Entity> entityOptional = world.getOccupant(pressed);
