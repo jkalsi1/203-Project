@@ -10,7 +10,7 @@ public final class VirtualWorld extends PApplet
 {
     private static final int TIMER_ACTION_PERIOD = 100;
 
-    private static final int VIEW_WIDTH = 840;
+    private static final int VIEW_WIDTH = 640;
     private static final int VIEW_HEIGHT = 480;
     private static final int TILE_WIDTH = 32;
     private static final int TILE_HEIGHT = 32;
@@ -168,37 +168,54 @@ public final class VirtualWorld extends PApplet
                 player.scheduleActions(scheduler, world, imageStore);
                 playerCheckCount++;
             }
+            if (key == 't' && playerCheckCount == 1 || key == 'T' && playerCheckCount==1)
+            {
+                player.executeActivity(world, imageStore, scheduler);
+            }
             // move up with w (only works when there is an existing player)
-           if(key == 'w' || key == 'W' && playerCheckCount == 1)
+           if(key == 'w' && playerCheckCount == 1|| key == 'W' && playerCheckCount == 1)
            {
                dy = -1;
-               view.shiftView(dx, dy);
                Point newPos = player.nextPositionPlayer(world, 1);
+               // only shifts view if the player moves (else it wont move world camera)
+               if (!player.getPosition().equals(newPos))
+               {
+                   view.shiftView(dx, dy);
+               }
                world.moveEntity(player, newPos);
-
            }
             // move up with s (only works when there is an existing player)
-            if(key == 's' || key == 'S' && playerCheckCount == 1)
+            if(key == 's' && playerCheckCount == 1|| key == 'S' && playerCheckCount == 1)
             {
                 dy = 1;
-                view.shiftView(dx, dy);
                 Point newPos = player.nextPositionPlayer(world, 2);
+                // only shifts view if the player moves (else it wont move world camera)
+                if (!player.getPosition().equals(newPos))
+                {
+                    view.shiftView(dx, dy);
+                }
                 world.moveEntity(player, newPos);
             }
             // move up with w (only works when there is an existing player)
-            if(key == 'a' || key == 'A' && playerCheckCount == 1)
+            if(key == 'a' && playerCheckCount == 1|| key == 'A' && playerCheckCount == 1)
             {
                 dx = -1;
-                view.shiftView(dx, dy);
                 Point newPos = player.nextPositionPlayer(world, 3);
+                if (!player.getPosition().equals(newPos))
+                {
+                    view.shiftView(dx, dy);
+                }
                 world.moveEntity(player, newPos);
             }
             // move up with w (only works when there is an existing player)
-            if(key == 'd' || key == 'D' && playerCheckCount == 1)
+            if(key == 'd' && playerCheckCount == 1 || key == 'D' && playerCheckCount == 1)
             {
                 dx = 1;
-                view.shiftView(dx, dy);
                 Point newPos = player.nextPositionPlayer(world, 4);
+                if (!player.getPosition().equals(newPos))
+                {
+                    view.shiftView(dx, dy);
+                }
                 world.moveEntity(player, newPos);
             }
 
