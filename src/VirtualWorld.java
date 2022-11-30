@@ -163,7 +163,7 @@ public final class VirtualWorld extends PApplet
             // create new player (maximum of 1 per world) when 0 is pressed
             if (key == '0' && playerCheckCount == 0)
             {
-                player = new Player("player", new Point(20, 1), imageStore.getImageList("player"), 4,5,0,0 );
+                player = new Player("player", new Point(20, 1), imageStore.getImageList("playerD"), 4,5,0,0 );
                 world.addEntity(player);
                 player.scheduleActions(scheduler, world, imageStore);
                 playerCheckCount++;
@@ -177,6 +177,7 @@ public final class VirtualWorld extends PApplet
            {
                dy = -1;
                Point newPos = player.nextPositionPlayer(world, 1);
+               player.setImages(imageStore.getImageList("playerU"));
                // only shifts view if the player moves (else it wont move world camera)
                if (!player.getPosition().equals(newPos))
                {
@@ -189,6 +190,7 @@ public final class VirtualWorld extends PApplet
             {
                 dy = 1;
                 Point newPos = player.nextPositionPlayer(world, 2);
+                player.setImages(imageStore.getImageList("playerD"));
                 // only shifts view if the player moves (else it wont move world camera)
                 if (!player.getPosition().equals(newPos))
                 {
@@ -201,6 +203,7 @@ public final class VirtualWorld extends PApplet
             {
                 dx = -1;
                 Point newPos = player.nextPositionPlayer(world, 3);
+                player.setImages(imageStore.getImageList("playerL"));
                 if (!player.getPosition().equals(newPos))
                 {
                     view.shiftView(dx, dy);
@@ -212,6 +215,7 @@ public final class VirtualWorld extends PApplet
             {
                 dx = 1;
                 Point newPos = player.nextPositionPlayer(world, 4);
+                player.setImages(imageStore.getImageList("playerR"));
                 if (!player.getPosition().equals(newPos))
                 {
                     view.shiftView(dx, dy);
