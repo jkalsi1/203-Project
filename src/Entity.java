@@ -39,7 +39,6 @@ public abstract class Entity
     {
         return id;
     }
-
 //    public String getKind()
 //    {
 //        return kind;
@@ -86,5 +85,7 @@ public abstract class Entity
         return (this).images.get(this.imageIndex);
     }
 
-
+    public void setImages(List<PImage> newImages) {
+        this.images = newImages;
+    }
 }
