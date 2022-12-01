@@ -57,7 +57,7 @@ public class Wyvern  extends ActionEntities{
             Entity target,
             EventScheduler scheduler)
     {
-        if (Point.adjacent(wyvern.getPosition(), target.getPosition())) {
+        if (Point.adjacent(wyvern.getPosition(), target.getPosition()) && target.getHealth() >0) {
             target.setHealth(target.getHealth()-1);
 //            world.removeEntity(target);
 //            scheduler.unscheduleAllEvents(target);

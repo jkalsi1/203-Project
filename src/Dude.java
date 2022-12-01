@@ -36,6 +36,18 @@ public abstract class Dude extends ActionEntities
         this.resourceCount = resourceCount;
     }
 
+    public static int getDudeLimit() {
+        return DUDE_LIMIT;
+    }
+
+    public static int getDudeActionPeriod() {
+        return DUDE_ACTION_PERIOD;
+    }
+
+    public static int getDudeAnimationPeriod() {
+        return DUDE_ANIMATION_PERIOD;
+    }
+
     @Override
     public void scheduleActions(
             EventScheduler scheduler,

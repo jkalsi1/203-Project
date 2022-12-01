@@ -116,17 +116,38 @@ public class FAIRY extends ActionEntities
     {
 
         Optional<Entity> fairyTarget =
-                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(STUMP.class)));
+                world.findNearest(this.getPosition(), new ArrayList<>(Arrays.asList(STUMP.class, DeadDude.class)));
 
         if (fairyTarget.isPresent()) {
             Point tgtPos = fairyTarget.get().getPosition();
 
-            if (FAIRY.moveToFairy( this, world, fairyTarget.get(), scheduler)) {
-                SAPLING sapling = new SAPLING("sapling_" + this.getId(), tgtPos,
-                        imageStore.getImageList(SAPLING.SAPLING_KEY), SAPLING.getSaplingActionAnimationPeriod(), SAPLING.getSaplingActionAnimationPeriod(), 0, SAPLING.getSaplingHealthLimit());
+            if (fairyTarget.get().getClass().equals(STUMP.class))
+            {
+                if (FAIRY.moveToFairy(this, world, fairyTarget.get(), scheduler)) {
+                    SAPLING sapling = new SAPLING("sapling_" + this.getId(), tgtPos,
+                            imageStore.getImageList(SAPLING.SAPLING_KEY), SAPLING.getSaplingActionAnimationPeriod(), SAPLING.getSaplingActionAnimationPeriod(), 0, SAPLING.getSaplingHealthLimit());
 
-                world.addEntity(sapling);
-                sapling.scheduleActions(scheduler, world, imageStore);
+                    world.addEntity(sapling);
+                    sapling.scheduleActions(scheduler, world, imageStore);
+                }
+            }
+            if (fairyTarget.get().getClass().equals(DeadDude.class))
+            {
+                if (FAIRY.moveToFairy(this, world, fairyTarget.get(), scheduler))
+                {
+                    DUDE_NOT_FULL entity = new DUDE_NOT_FULL( fairyTarget.get().getId(),
+                            tgtPos,
+                            imageStore.getImageList(Dude.DUDE_KEY),
+                            Dude.getDudeLimit(),
+                            0,
+                            Dude.getDudeActionPeriod(),
+                            Dude.getDudeAnimationPeriod(),
+                            10 , 10);
+                    world.removeEntity(fairyTarget.get());
+                    world.addEntity(entity);
+                    System.out.println("gg");
+                    entity.scheduleActions(scheduler, world, imageStore);
+                }
             }
         }
 

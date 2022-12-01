@@ -45,8 +45,11 @@ public class DUDE_NOT_FULL extends Dude
         }
         else
         {
+            DeadDude deadDude = new DeadDude(this.getId(), this.getPosition(), imageStore.getImageList("deaddude"),0, 0);
             world.removeEntity(this);
             scheduler.unscheduleAllEvents(this);
+            world.addEntity(deadDude);
+
         }
     }
 
