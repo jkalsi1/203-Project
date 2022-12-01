@@ -7,11 +7,14 @@ wyvern images/wyvern5.bmp 255 255 255 0
 wyvern images/wyvern6.bmp 255 255 255 0
 wyvern images/wyvern7.bmp 255 255 255 0
 wyvern images/wyvern8.bmp 255 255 255 0
-obstacle images/water0.png
-obstacle images/water1.png
-obstacle images/water2.png
-obstacle images/water1.png
-obstacle images/water0.png
+obstacle images/lava1.png
+obstacle images/lava2.png
+obstacle images/lava3.png
+obstacle images/lava4.png
+obstacle images/lava5.png
+obstacle images/lava6.png
+obstacle images/lava7.png
+obstacle images/lava8.png
 grass images/grass.png
 infectedgrass images/grass_infected.png
 infectedflowers images/flowers_infected.png
@@ -24,6 +27,7 @@ dirt_vert_right images/dirt_vert_left.png
 dirt_bot_left_corner images/dirt_bot_left_corner.png
 dirt_bot_right_up images/dirt_bot_right_up.png
 dirt_vert_left_bot images/dirt_vert_left_bot.png
+dirt_junction images/dirt_junction.png
 bridge images/bridge.png
 tree images/tree0.png
 tree images/tree1.png
